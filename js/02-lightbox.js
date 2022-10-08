@@ -7,9 +7,9 @@ const galleryContainerRef = document.querySelector(`.gallery`);
 const galleryMarkup = createGalleryMarkup(galleryItems);
 galleryContainerRef.innerHTML = galleryMarkup;
 
-let lightbox;
-
-galleryContainerRef.addEventListener(`click`, clickOnImgElGallery);
+galleryContainerRef.addEventListener(`click`, (event) =>
+  event.preventDefault()
+);
 
 function createGalleryMarkup(galleryItems) {
   return galleryItems
@@ -22,11 +22,8 @@ function createGalleryMarkup(galleryItems) {
     .join("");
 }
 
-function clickOnImgElGallery(event) {
-  event.preventDefault();
-
-  lightbox = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionDelay: 250,
-  });
-}
+new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+  docClose: true,
+});
